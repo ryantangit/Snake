@@ -2,12 +2,12 @@
 #define ARENA_WIDTH_MARGIN 2
 #define ARENA_HEIGHT_MARGIN 2
 
-static int ARENA_WIDTH;
-static int ARENA_HEIGHT;
 static struct winsize *ws;
 struct gameboard {
 	unsigned short score;
 	int game_over;
+	int ARENA_WIDTH;
+	int ARENA_HEIGHT;
 	char** state;
 };
 struct gameboard* init_board();

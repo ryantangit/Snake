@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "gameboard.h"
-
+#include "snake.h"
 
 
 //Driver function
