@@ -11,6 +11,7 @@ int main (){
 		int c = getchar();
 		if (c == 'q'){
 			end_game(board);
+			free_board(board);
 		}
 		
 	}

@@ -16,3 +16,4 @@ void generate_food();
 void print_gameboard(struct gameboard *board);
 void print_score();
 void end_game(struct gameboard *board);
+

@@ -1,7 +1,7 @@
 #include "gameboard.h"
-#include "stdio.h"
+#include <malloc.h>
+#include <stdio.h>
 #include <sys/ioctl.h>
-#include "malloc.h"
 
 
 struct gameboard* init_board(){
