@@ -8,13 +8,13 @@ struct gameboard* init_board(){
 	ws = (struct winsize*)malloc(sizeof(struct winsize));
 	ioctl(0, TIOCGWINSZ, ws);
 	struct gameboard *board = (struct gameboard*)malloc(sizeof(struct gameboard));
-	board->ARENA_HEIGHT = ws->ws_row - ARENA_HEIGHT_MARGIN;
-	board->ARENA_WIDTH = ws->ws_col - ARENA_WIDTH_MARGIN;
+	board->ARENA_ROW = ws->ws_row - ARENA_ROW_MARGIN;
+	board->ARENA_COL = ws->ws_col - ARENA_COL_MARGIN;
 	board->game_over = 0;
-	board->state = (char**)malloc(sizeof(char*) * board->ARENA_HEIGHT);
-	for (int i = 0; i < board->ARENA_HEIGHT; i++){
-		board->state[i] = (char*)malloc(sizeof(char) * board->ARENA_WIDTH);
-		for (int j = 0; j < board->ARENA_WIDTH; j++){
+	board->state = (char**)malloc(sizeof(char*) * board->ARENA_ROW);
+	for (int i = 0; i < board->ARENA_ROW; i++){
+		board->state[i] = (char*)malloc(sizeof(char) * board->ARENA_COL);
+		for (int j = 0; j < board->ARENA_COL; j++){
 			board->state[i][j] = ' ';
 		}
 	}
@@ -23,21 +23,25 @@ struct gameboard* init_board(){
 
 void free_board(struct gameboard *board){
 	free(ws);	
-	for (int i = 0; i < board->ARENA_HEIGHT; i++){
+	for (int i = 0; i < board->ARENA_ROW; i++){
 		free(board->state[i]);
 	}
 	free(board->state);
 	free(board);
 }
 
+void board_change_row_col(struct gameboard *board, int row, int col, char c){
+	board->state[row][col] = c;	
+}
+
 void print_gameboard(struct gameboard *board){
 	printf("\e[2J");
-	for (int i = 0; i < board->ARENA_HEIGHT; i++){
+	for (int i = 0; i < board->ARENA_ROW; i++){
 		putchar('|');
-		for (int j = 1; j < board->ARENA_WIDTH; j++){
+		for (int j = 1; j < board->ARENA_COL; j++){
 			if (i == 0) {
 				putchar('@');	
-			} else if(i == board->ARENA_HEIGHT - 1) {
+			} else if(i == board->ARENA_ROW - 1) {
 				putchar('@');	
 			} else {
 				printf("%c", board->state[i][j]);
