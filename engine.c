@@ -10,9 +10,14 @@ int main (){
 	while(!board->game_over){
 		print_gameboard(board);
 		int c = getchar();
-		if (c == 'q'){
+		
+		if (c == 'q' || snake_out_bounds(snake, board)){
 			end_game(board);
 			free_board(board);
+			free_snake(snake);
+		} else if (c == 'w'){
+			//TODO: Parse inputs for changing directions
+			snake_move(snake, board);
 		}
 		
 	}

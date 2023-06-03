@@ -3,8 +3,9 @@
 #define START_SPEED 1
 #define DEFAULT_SNAKE_AVATAR '%'
 struct snake_node {
-	int row; //x is akin to column
-	int col; //y is akin to row
+	int row; 
+	int col; 
+	//TODO: considering a 2-d boolean exists for food generation.
 	struct snake_node *next;
 };
 struct snake {
