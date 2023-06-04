@@ -40,11 +40,24 @@ void increase_score(struct gameboard *board){
 }
 
 void generate_food(struct gameboard *board){
-	//TODO: HAVE LOGIC TO ACCOUNT FOR NOT SPAWNING FOOD AT SNAKE, THINKING ABOUT SNAKE BOOLEAN 
+	//TODO: HAVE LOGIC TO ACCOUNT FOR NOT SPAWNING FOOD AT SNAKE/WALL, THINKING ABOUT SNAKE BOOLEAN 
 	srandom(time(NULL));
-	int rand_row = rand() % board->BOARD_ROW;
-	int rand_col = rand() % board->BOARD_COL;
+	int rand_row, rand_col;
+	do {
+		rand_row = rand() % board->BOARD_ROW;
+
+	} while (!legal_in_bound(board, rand_row, 1));
+	do {
+		rand_col = rand() % board->BOARD_COL;
+	} while (!legal_in_bound(board, 1, rand_col));
 	board_change_row_col(board, rand_row, rand_col, BOARD_FOOD_AVATAR);
+}
+
+int legal_in_bound(struct gameboard *board, int row, int col){
+	if((col >= board->BOARD_COL - 1) || (row >= board->BOARD_ROW - 1) ||
+			(col <= 0) || (row <= 0))
+		return 0;	
+	return 1;	
 }
 
 int contain_food(struct gameboard *board, int row, int col){
@@ -55,7 +68,7 @@ void print_gameboard(struct gameboard *board){
 	printf("\e[2J");
 	for (int i = 0; i < board->BOARD_ROW; i++){
 		putchar('|');
-		for (int j = 1; j < board->BOARD_COL; j++){
+		for (int j = 1; j < board->BOARD_COL - 1; j++){
 			if (i == 0) {
 				putchar('-');	
 			} else if(i == board->BOARD_ROW - 1) {

@@ -2,10 +2,13 @@
 #define START_D_COL 0
 #define START_SPEED 1
 #define DEFAULT_SNAKE_AVATAR '%'
+
+enum direction {NORTH, SOUTH, WEST, EAST};
 struct snake_node {
 	int row; 
 	int col; 
 	//TODO: considering a 2-d boolean exists for food generation.
+	struct snake_node *prev;
 	struct snake_node *next;
 };
 struct snake {

@@ -7,6 +7,7 @@ struct snake_node* create_snake_node(int row, int col){
 	struct snake_node *sn = (struct snake_node*)malloc(sizeof(struct snake_node));
 	sn->row = row;
 	sn->col = col;
+	sn->prev = NULL;
 	sn->next = NULL;
 	return sn;
 }
@@ -35,32 +36,32 @@ void free_snake(struct snake *snake){
 }
 
 int snake_out_bounds(struct snake *snake, struct gameboard *board){
-	if((snake->head->col >= board->BOARD_COL - 1) || (snake->head->row >= board->BOARD_ROW - 1) ||
-			(snake->head->col <= 0) || (snake->head->row <= 0))
-		return 1;	
-	return 0;
+	return !legal_in_bound(board, snake->head->row, snake->head->col);	
+}
+
+void snake_change_dir(struct snake *snake, int dir){
+	if(dir == NORTH){
+		snake->d_row = -1;
+		snake->d_col = 0;
+	} else if (dir == SOUTH){
+		snake->d_row = 1;
+		snake->d_col = 0;
+	} else if (dir == WEST) {
+		snake->d_row = 0;
+		snake->d_col = -1;
+	} else if (dir == EAST) {
+		snake->d_row = 0;
+		snake->d_col = 1;
+	}
 }
 
 void snake_move(struct snake *snake, struct gameboard *board){
 	struct snake_node *ref = snake->head; 	
-	int last_row, last_col;
 	int encountered_food = 0;
-	while(NULL != ref){
-		last_row = ref->row;
-		last_col = ref->col;
-		ref->row = (snake->speed * snake->d_row) + ref->row;	
-		ref->col = (snake->speed * snake->d_col) + ref->col;
-		if(!encountered_food && contain_food(board, ref->row, ref->col)){
-			encountered_food = 1;
-		}
-		board_change_row_col(board, ref->row, ref->col, snake->snake_avatar);
-		ref = ref->next;
-	}
-	board_change_row_col(board, last_row, last_col, ' ');
-	if(encountered_food){
-		increase_score(board);
-		generate_food(board);	
-		//TODO: logic for creating the tail end of the snake [Should be opposite in the direction snake moves]
-		//TODO: Edge case when snake tail reaches out of bound, decide if that ends game
-	}
+	//Head moves
+	//For remaining node:
+	//    set col/row to previous node
+	//If head ate food:
+	//    increase score
+	//    create new node, attach prev node
 }
