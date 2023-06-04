@@ -17,10 +17,12 @@ struct snake {
 	int speed;
 	char snake_avatar;
 	struct snake_node *head;
+	struct snake_node *tail;
 };
 
 struct snake_node* create_snake_node(int row, int col);
 struct snake* init_snake(struct gameboard *board);
+void snake_attach_tail(struct snake *snake, int row, int col);
 void free_snake(struct snake *snake);
 void snake_change_dir(struct snake *snake, int dir);
 int snake_out_bounds(struct snake *snake, struct gameboard *board);
