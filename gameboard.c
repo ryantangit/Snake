@@ -45,11 +45,8 @@ void generate_food(struct gameboard *board){
 	int rand_row, rand_col;
 	do {
 		rand_row = rand() % board->BOARD_ROW;
-
-	} while (!legal_in_bound(board, rand_row, 1));
-	do {
 		rand_col = rand() % board->BOARD_COL;
-	} while (!legal_in_bound(board, 1, rand_col));
+	} while (!legal_in_bound(board, rand_row, rand_col));	
 	board_change_row_col(board, rand_row, rand_col, BOARD_FOOD_AVATAR);
 }
 

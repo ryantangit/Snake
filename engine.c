@@ -17,6 +17,7 @@ int main (){
 				end_game(board);
 				free_board(board);
 				free_snake(snake);
+				break;
 			} else if (c == 'w'){
 				direction = NORTH;
 			} else if (c == 'a'){
@@ -29,6 +30,7 @@ int main (){
 			snake_change_dir(snake, direction);	
 			snake_move(snake, board);
 			}
+		//snake_print(snake);
 	}
 	return 0;
 }

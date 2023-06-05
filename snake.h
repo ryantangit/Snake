@@ -15,6 +15,7 @@ struct snake {
 	int d_row;
 	int d_col;
 	int speed;
+	enum direction dir;
 	char snake_avatar;
 	struct snake_node *head;
 	struct snake_node *tail;
@@ -26,4 +27,7 @@ void snake_attach_tail(struct snake *snake, int row, int col);
 void free_snake(struct snake *snake);
 void snake_change_dir(struct snake *snake, int dir);
 int snake_out_bounds(struct snake *snake, struct gameboard *board);
+void snake_body_move(struct snake *snake);
+void snake_head_move(struct snake* snake, struct gameboard *board, int last_row, int last_col);
 void snake_move(struct snake *snake, struct gameboard *board);
+void snake_print(struct snake *snake);

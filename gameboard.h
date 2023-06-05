@@ -1,6 +1,6 @@
 
-#define BOARD_COL_MARGIN 190
-#define BOARD_ROW_MARGIN 50
+#define BOARD_COL_MARGIN 5
+#define BOARD_ROW_MARGIN 5
 #define BOARD_FOOD_AVATAR 'O'
 static struct winsize *ws;
 struct gameboard {
