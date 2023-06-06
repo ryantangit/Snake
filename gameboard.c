@@ -63,6 +63,7 @@ int contain_food(struct gameboard *board, int row, int col){
 
 void print_gameboard(struct gameboard *board){
 	printf("\e[2J");
+	printf("score: %3d          q-quit        wasd-move\n", board->score);
 	for (int i = 0; i < board->BOARD_ROW; i++){
 		putchar('|');
 		for (int j = 1; j < board->BOARD_COL - 1; j++){

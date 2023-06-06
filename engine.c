@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <unistd.h>
 #include "gameboard.h"
 #include "snake.h"
+
 
 
 //Driver function
@@ -9,6 +11,7 @@ int main (){
 	struct snake *snake = init_snake(board);
 	enum direction direction;
 	while(!board->game_over){
+		sleep(0.05);	
 		print_gameboard(board);
 		int c = getchar();
 		
