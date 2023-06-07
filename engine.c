@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <time.h>
 #include <unistd.h>
 #include "gameboard.h"
 #include "snake.h"
+#include "util.h"
 
 
 
@@ -9,13 +11,11 @@
 int main (){
 	struct gameboard *board = init_board();
 	struct snake *snake = init_snake(board);
-	enum direction direction;
+	enum direction direction = NORTH;
 	while(!board->game_over){
-		sleep(0.05);	
 		print_gameboard(board);
-		int c = getchar();
-		
-		if (c != '\n'){
+		if(kbhit() != 0){	
+			int c = getch();	
 			if (c == 'q' || snake_out_bounds(snake, board)){
 				end_game(board);
 				free_board(board);
@@ -31,8 +31,9 @@ int main (){
 				direction = SOUTH;
 			} 
 			snake_change_dir(snake, direction);	
-			snake_move(snake, board);
-			}
+		}
+		snake_move(snake, board);
+		msleep(300);	
 		//snake_print(snake);
 	}
 	return 0;
