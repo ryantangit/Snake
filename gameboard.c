@@ -46,7 +46,7 @@ void generate_food(struct gameboard *board){
 	do {
 		rand_row = rand() % board->BOARD_ROW;
 		rand_col = rand() % board->BOARD_COL;
-	} while (!legal_in_bound(board, rand_row, rand_col));	
+	} while (!legal_in_bound(board, rand_row, rand_col) && board->state[rand_row][rand_col] != DEFAULT_SNAKE_AVATAR);	
 	board_change_row_col(board, rand_row, rand_col, BOARD_FOOD_AVATAR);
 }
 

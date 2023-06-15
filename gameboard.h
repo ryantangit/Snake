@@ -2,6 +2,7 @@
 #define BOARD_COL_MARGIN 2
 #define BOARD_ROW_MARGIN 2
 #define BOARD_FOOD_AVATAR 'O'
+#define DEFAULT_SNAKE_AVATAR '%'
 static struct winsize *ws;
 struct gameboard {
 	unsigned short score;
