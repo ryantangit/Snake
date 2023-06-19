@@ -1,5 +1,6 @@
 #include "gameboard.h"
 #include <malloc.h>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
@@ -52,8 +53,10 @@ void generate_food(struct gameboard *board){
 
 int legal_in_bound(struct gameboard *board, int row, int col){
 	if((col >= board->BOARD_COL - 1) || (row >= board->BOARD_ROW - 1) ||
-			(col <= 0) || (row <= 0))
+			(col <= 0) || (row <= 0)){
+		strncpy(board->end_message, "Out of bounds.", 17);	
 		return 0;	
+	}
 	return 1;	
 }
 

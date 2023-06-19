@@ -9,6 +9,7 @@ struct gameboard {
 	int game_over;
 	int BOARD_COL;
 	int BOARD_ROW;
+	char end_message[100];
 	char** state;
 };
 struct gameboard* init_board();

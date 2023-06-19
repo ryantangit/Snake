@@ -17,9 +17,7 @@ int main (){
 		if(kbhit() != 0){	
 			int c = getch();	
 			if (c == 'q' || snake_out_bounds(snake, board)){
-				end_game(board);
-				free_board(board);
-				free_snake(snake);
+				end_game(board);		
 				break;
 			} else if (c == 'w'){
 				direction = NORTH;
@@ -36,5 +34,8 @@ int main (){
 		msleep(300);	
 		//snake_print(snake);
 	}
+	printf("%s\n", board->end_message);
+	free_snake(snake);
+	free_board(board);
 	return 0;
 }

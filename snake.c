@@ -1,5 +1,6 @@
 #include "gameboard.h"
 #include "snake.h"
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -84,6 +85,11 @@ void snake_body_move(struct snake* snake){
 void snake_head_move(struct snake* snake, struct gameboard *board, int last_row, int last_col){
 	snake->head->row = snake->head->row + (snake->d_row * START_SPEED);
 	snake->head->col = snake->head->col + (snake->d_col * START_SPEED);
+	if (board->state[snake->head->row][snake->head->col] == DEFAULT_SNAKE_AVATAR){
+		strncpy(board->end_message, "Snake ate itself.", 18);
+		board->game_over = 1;	
+		return;
+	}
 	if (contain_food(board, snake->head->row, snake->head->col)){
 		increase_score(board);	
 		snake_attach_tail(snake, last_row, last_col);
