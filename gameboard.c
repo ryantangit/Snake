@@ -41,7 +41,6 @@ void increase_score(struct gameboard *board){
 }
 
 void generate_food(struct gameboard *board){
-	//TODO: HAVE LOGIC TO ACCOUNT FOR NOT SPAWNING FOOD AT SNAKE/WALL, THINKING ABOUT SNAKE BOOLEAN 
 	srandom(time(NULL));
 	int rand_row, rand_col;
 	do {
